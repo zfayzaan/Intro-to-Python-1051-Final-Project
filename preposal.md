@@ -2,9 +2,11 @@
 
 ## What idea(s) do you have for your final project?
 
-Side-scroller game. RPG elements such as swords, armor, lives.
-Cookie-clicker type game. Will be something other than cookies.
-Space-invaders with weapon and armor upgrades, maybe harder boss enemies
+1.Side-scroller game. RPG elements such as swords, armor, lives.
+
+2.Cookie-clicker type game. Will be something other than cookies.
+
+3.Space-invaders with weapon and armor upgrades, maybe harder boss enemies
 
 All games will have upgrades and sprites. Side-scoller and space-invaders will have increased level of difficulty as you progress
 
