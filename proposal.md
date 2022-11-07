@@ -19,22 +19,24 @@ NA
 ## If planning to collaborate with 1 or 2 classmates for the final project, list their names, email addresses, and the names of their assigned TAs below.
 
 Noel Chacko - noelchacko@temple.edu
-Shyqyri Dogjani - 
+
+Shyqyri Dogjani -
+
 Fayzaan Awan - 
 
 ## In the world of software, most everything takes longer to implement than you expect. And so it's not uncommon to accomplish less in a fixed amount of time than you hope.
 
 ### In a sentence (or list of features), define a GOOD outcome for your final project. I.e., what WILL you accomplish no matter what?
 
-We will have the user be able to click the owl and gain score. The score will be used to buy upgrades. Upgrades can change owl speed, owl size or amount of score per click. 
+We will have the user be able to click the owl and gain score. The score will be used to buy upgrades. Upgrades can change owl speed, owl size or amount of score per click. Have sound effects for clicks and upgrades.
 
 ### In a sentence (or list of features), define a BETTER outcome for your final project. I.e., what do you THINK you can accomplish before the final project's deadline?
 
-TODO
+We will be able to create a better graphical interface. Will have polished start screen and will be able to save the game and return later to continue a game. Save info could be saved in a csv file and could be read during game start so that games can continued.
 
 ### In a sentence (or list of features), define a BEST outcome for your final project. I.e., what do you HOPE to accomplish before the final project's deadline?
 
-TODO
+The game will work flawlessly and we will have many levels of upgrades. Add boss levels that will either give you a lot of score or will take points away from you based on if you are able to defeat the boss or not. Clicking on the boss fast enough will decrease the health of the boss.
 
 ## In a paragraph or more, outline your next steps. What new skills will you need to acquire? What topics will you need to research? If working with one of two classmates, who will do what?
 
