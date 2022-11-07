@@ -22,7 +22,7 @@ Noel Chacko - noelchacko@temple.edu
 
 Shyqyri Dogjani -
 
-Fayzaan Awan - 
+Fayzaan Awan - tuo63938@temple.edu / fayzaan.awan@temple.edu
 
 ## In the world of software, most everything takes longer to implement than you expect. And so it's not uncommon to accomplish less in a fixed amount of time than you hope.
 
