@@ -2,11 +2,11 @@
 
 ## What will (likely) be the title of your project?
 
-The cookie Clicker game.
+Temple Owl Clicker
 
 ## In just a sentence or two, summarize your project. (E.g., "A website that lets you buy and sell stocks.")
 
-Our project will consist of a game similar to the popular browser game cookie clicker, where an object will count the number of clicks done by the user, which then can be used to buy auto-generated upgrades, to creat more clicks.
+Our project will consist of a game similar to the popular browser game cookie clicker, where an object will count the number of clicks done by the user, which then can be used to buy auto-generated upgrades, to create more clicks. In leiu of a cookie we will have Hooter the owl.
 
 ## In a paragraph or more, detail your project. What will your software do? What features will it have? How will it be executed?
 
@@ -14,17 +14,19 @@ Our software will use an accumlator loop in order to collect the amount of click
 
 ## If planning to combine 1051's final project with another course's final project, with which other course? And which aspect(s) of your proposed project would relate to 1051, and which aspect(s) would relate to the other course?
 
-TODO, if applicable
+NA
 
 ## If planning to collaborate with 1 or 2 classmates for the final project, list their names, email addresses, and the names of their assigned TAs below.
 
-TODO, if applicable
+Noel Chacko - noelchacko@temple.edu
+Shyqyri Dogjani - 
+Fayzaan Awan - 
 
 ## In the world of software, most everything takes longer to implement than you expect. And so it's not uncommon to accomplish less in a fixed amount of time than you hope.
 
 ### In a sentence (or list of features), define a GOOD outcome for your final project. I.e., what WILL you accomplish no matter what?
 
-TODO
+We will have the user be able to click the owl and gain score. The score will be used to buy upgrades. Upgrades can change owl speed, owl size or amount of score per click. 
 
 ### In a sentence (or list of features), define a BETTER outcome for your final project. I.e., what do you THINK you can accomplish before the final project's deadline?
 
