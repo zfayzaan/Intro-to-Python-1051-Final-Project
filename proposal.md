@@ -10,7 +10,7 @@ Our project will consist of a game similar to the popular browser game cookie cl
 
 ## In a paragraph or more, detail your project. What will your software do? What features will it have? How will it be executed?
 
-TODO
+Our software will use an accumlator loop in order to collect the amount of clicks that the user has done. From there the clicks will be stored in a dictionary in order to easily substract and add to this click bank. 
 
 ## If planning to combine 1051's final project with another course's final project, with which other course? And which aspect(s) of your proposed project would relate to 1051, and which aspect(s) would relate to the other course?
 
