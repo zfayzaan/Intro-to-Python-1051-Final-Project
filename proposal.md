@@ -2,11 +2,11 @@
 
 ## What will (likely) be the title of your project?
 
-TODO
+The cookie Clicker game.
 
 ## In just a sentence or two, summarize your project. (E.g., "A website that lets you buy and sell stocks.")
 
-TODO
+Our project will consist of a game similar to the popular browser game cookie clicker, where an object will count the number of clicks done by the user, which then can be used to buy auto-generated upgrades, to creat more clicks.
 
 ## In a paragraph or more, detail your project. What will your software do? What features will it have? How will it be executed?
 
