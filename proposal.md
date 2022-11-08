@@ -16,7 +16,7 @@ Our software will use an accumlator loop in order to collect the amount of click
 
 Noel Chacko - noelchacko@temple.edu
 
-Shyqyri Dogjani -
+Shyqyri Dogjani - tuo60645@temple.edu
 
 Fayzaan Awan - tuo63938@temple.edu / fayzaan.awan@temple.edu
 
