@@ -12,10 +12,6 @@ Our project will consist of a game similar to the popular browser game cookie cl
 
 Our software will use an accumlator loop in order to collect the amount of clicks that the user has done. From there the clicks will be stored in a dictionary in order to easily substract and add to this click bank. We would like to create the game with turtle, and my group will generally be using the IDLE and Vscode software to write out our code. The code will be executed utilizing the turtle, random, and possibly any other methods we find while researching how we can do the tasks we want to do. So far my group has discussed some features such as an upgrade system to increase the amount of clicks, a random path for the owl image to simulate a flying owl, and make the owl become bigger as it's clicked more. The whole point of the game as of right now is to feed the owl, and the upgrade system is just different places to eat on campus with each place having a different value of clicks. I feel as though resetting the owl size could be a challenge but mostly executed through the use of turtle.
 
-## If planning to combine 1051's final project with another course's final project, with which other course? And which aspect(s) of your proposed project would relate to 1051, and which aspect(s) would relate to the other course?
-
-NA
-
 ## If planning to collaborate with 1 or 2 classmates for the final project, list their names, email addresses, and the names of their assigned TAs below.
 
 Noel Chacko - noelchacko@temple.edu
