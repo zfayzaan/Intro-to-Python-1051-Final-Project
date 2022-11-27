@@ -67,6 +67,11 @@ Button3_y = -360
 Button3Length = 200
 Button3Width = 50
 
+ButtonR_x = -195
+ButtonR_y = -300
+ButtonRLength= 200
+ButtonRWidth= 50
+
 def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the button with the message
     ButtonPen.penup()
     ButtonPen.begin_fill()
@@ -103,6 +108,18 @@ def drawButtonSlower(ButtonPen, message = 'Slow Down Owl | COST 15'): #makes the
     ButtonPen.goto(Button3_x + 15, Button3_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
 
+def drawRosenbutton(ButtonPen, message = 'Click for a suprise'):
+    ButtonPen.penup()
+    ButtonPen.begin_fill()
+    ButtonPen.goto(ButtonR_x, ButtonR_y)
+    ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y)
+    ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y + ButtonRWidth)
+    ButtonPen.goto(ButtonR_x, ButtonR_y + ButtonRWidth)
+    ButtonPen.goto(ButtonR_x, ButtonR_y)
+    ButtonPen.end_fill()
+    ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
+    ButtonPen.write(message, font = ('Arial', 15, 'normal'))
+    
 def buttonClicks(x, y):
     global double
     global clicks
@@ -161,6 +178,22 @@ def buttonClicks(x, y):
                 clicks = clicks - 15
                 slowDown = True
 
+    if ButtonR_x <= x <= ButtonR_x + ButtonRLength:
+        if ButtonR_y <= y <= ButtonR_y + ButtonRWidth:
+            if clicks >= 0:
+                ButtonPen.fillcolor('green')
+                ButtonPen.pencolor('black')
+                ButtonPen.penup()
+                ButtonPen.begin_fill()
+                ButtonPen.goto(ButtonR_x, ButtonR_y)
+                ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y)
+                ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y + ButtonRWidth)
+                ButtonPen.goto(ButtonR_x, ButtonR_y + ButtonRWidth)
+                ButtonPen.goto(ButtonR_x, ButtonR_y)
+                ButtonPen.end_fill()
+                ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
+                owlimage = "rosen.gif"
 ###################################################################################################################
 wn.onclick(buttonClicks)
 
@@ -187,5 +220,36 @@ while i < 500:
         owl.setheading(180)
         owl.forward(650)
         i += 1
+###############cursor picture jawn
 
+cursor= turtle.Turtle()
+cursorscreen = turtle.Screen()
+cursorimage= "burger.gif"
+def tofront(self, tobring):
+    newfront = tobring.clone()
+    tobring.ht()
+    return newfront
+
+cursorscreen.addshape(cursorimage)
+cursor.shape(cursorimage)
+cursor.up()
+def onmove(self, fun, add =None):
+    if fun is None:
+        self.cv.unbind('<Motion>')
+    else:
+        def eventfun(event):
+            fun(self.cv.canvasx(event.x) / self.xscale, -self.cv.canvasy(event.y) / self.yscale)
+        self.cv.bind('<Motion>', eventfun, add)
+def goto_handler(x,y):
+    onmove(cursorscreen, None)
+    cursor.setheading(cursor.towards(x,y))
+    cursor.goto(x,y)
+    onmove(cursorscreen, goto_handler)
+
+
+
+
+onmove(cursorscreen, goto_handler)
 wn.mainloop()
+turtle.mainloop()
+
