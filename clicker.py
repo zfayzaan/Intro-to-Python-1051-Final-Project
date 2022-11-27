@@ -7,15 +7,18 @@ import random
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')
 wn.title("Owl Clicker")
-wn.bgcolor("white")
+#wn.bgcolor("white")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
 wn.register_shape("owl_90.gif")
 wn.register_shape("burger.gif") #cursorimage place holder
 wn.register_shape("rosen.gif")
+wn.register_shape("rosen_90.gif")
+
 
 owl = turtle.Turtle()
-owlimage= "owl.gif"
+owlimage = "owl.gif"
+owlSmaller = "owl_90.gif"
 owl.shape(owlimage) #owlshape is now the image we selected
 owl.penup()
 owl.setpos(-300,0)
@@ -40,8 +43,8 @@ def clickedOnOwl(x, y):
     clicks += 1 + 1 * double # multiplying by boolean value of double. if double is true then our mouseclicks will yield 2x
     textPen.clear()
     textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold")) #this is the updated clicks counter that is drawn after clicking on the owl
-    owl.shape("owl_90.gif")
-    owl.shape("owl.gif") #these two lines is what animates the owl
+    owl.shape(owlimage)
+    owl.shape(owlSmaller) #these two lines is what animates the owl
 
 def autoClicker(n=1): #function for auto clicker. Adds one to clicks every second
     global clicks
@@ -73,8 +76,8 @@ Button3Width = 50
 
 ButtonR_x = -195
 ButtonR_y = -300
-ButtonRLength= 200
-ButtonRWidth= 50
+ButtonRLength = 200
+ButtonRWidth = 50
 
 def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the button with the message
     ButtonPen.penup()
@@ -112,7 +115,7 @@ def drawButtonSlower(ButtonPen, message = 'Slow Down Owl | COST 15'): #makes the
     ButtonPen.goto(Button3_x + 15, Button3_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
 
-def drawRosenbutton(ButtonPen, message = 'Click for a suprise'):
+def drawRosenbutton(ButtonPen, message = 'Click for a Suprise'):
     ButtonPen.penup()
     ButtonPen.begin_fill()
     ButtonPen.goto(ButtonR_x, ButtonR_y)
@@ -129,6 +132,8 @@ def buttonClicks(x, y):
     global clicks
     global slowDown
     global autoClicker
+    global owlimage
+    global owlSmaller
     if Button_x <= x <= Button_x + ButtonLength:
         if Button_y <= y <= Button_y + ButtonWidth:
             if clicks >= 30:
@@ -181,23 +186,23 @@ def buttonClicks(x, y):
                 ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
                 clicks = clicks - 15
                 slowDown = True
-
     if ButtonR_x <= x <= ButtonR_x + ButtonRLength:
         if ButtonR_y <= y <= ButtonR_y + ButtonRWidth:
-            if clicks >= 0:
-                ButtonPen.fillcolor('green')
-                ButtonPen.pencolor('black')
-                ButtonPen.penup()
-                ButtonPen.begin_fill()
-                ButtonPen.goto(ButtonR_x, ButtonR_y)
-                ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y)
-                ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y + ButtonRWidth)
-                ButtonPen.goto(ButtonR_x, ButtonR_y + ButtonRWidth)
-                ButtonPen.goto(ButtonR_x, ButtonR_y)
-                ButtonPen.end_fill()
-                ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
-                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
-                owlimage = "rosen.gif"
+            ButtonPen.fillcolor('green')
+            ButtonPen.pencolor('black')
+            ButtonPen.penup()
+            ButtonPen.begin_fill()
+            ButtonPen.goto(ButtonR_x, ButtonR_y)
+            ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y)
+            ButtonPen.goto(ButtonR_x + ButtonRLength, ButtonR_y + ButtonRWidth)
+            ButtonPen.goto(ButtonR_x, ButtonR_y + ButtonRWidth)
+            ButtonPen.goto(ButtonR_x, ButtonR_y)
+            ButtonPen.end_fill()
+            ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
+            ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
+            owlimage = "rosen.gif"
+            owlSmaller = "rosen_90.gif"
+            owl.shape(owlimage)
 
 ###################################################################################################################
 wn.onclick(buttonClicks)
@@ -209,7 +214,7 @@ drawRosenbutton(ButtonPen)
 
 owl.onclick(clickedOnOwl)
 
-owl.penup() #makes owl left and right
+owl.penup() #makes owl go left and right
 i = 0
 while i < 500:
     if slowDown == False:
@@ -248,6 +253,7 @@ def onmove(self, fun, add =None):
         def eventfun(event):
             fun(self.cv.canvasx(event.x) / self.xscale, -self.cv.canvasy(event.y) / self.yscale)
         self.cv.bind('<Motion>', eventfun, add)
+
 def goto_handler(x,y):
     onmove(cursorscreen, None)
     cursor.setheading(cursor.towards(x,y))
