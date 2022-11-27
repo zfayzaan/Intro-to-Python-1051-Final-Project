@@ -3,6 +3,7 @@ import time
 import threading
 import random
 
+
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')
 wn.title("Owl Clicker")
@@ -10,9 +11,12 @@ wn.bgcolor("white")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
 wn.register_shape("owl_90.gif")
+wn.register_shape("burger.gif") #cursorimage place holder
+wn.register_shape("rosen.gif")
 
 owl = turtle.Turtle()
-owl.shape("owl.gif") #owlshape is now the image we selected
+owlimage= "owl.gif"
+owl.shape(owlimage) #owlshape is now the image we selected
 owl.penup()
 owl.setpos(-300,0)
 owl.speed(4)
@@ -119,7 +123,7 @@ def drawRosenbutton(ButtonPen, message = 'Click for a suprise'):
     ButtonPen.end_fill()
     ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
-    
+
 def buttonClicks(x, y):
     global double
     global clicks
@@ -194,12 +198,14 @@ def buttonClicks(x, y):
                 ButtonPen.goto(ButtonR_x + 15, ButtonR_y + 15)
                 ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
                 owlimage = "rosen.gif"
+
 ###################################################################################################################
 wn.onclick(buttonClicks)
 
 drawButton2x(ButtonPen)
 drawButtonAuto(ButtonPen)
 drawButtonSlower(ButtonPen)
+drawRosenbutton(ButtonPen)
 
 owl.onclick(clickedOnOwl)
 
@@ -207,9 +213,10 @@ owl.penup() #makes owl left and right
 i = 0
 while i < 500:
     if slowDown == False:
-        owl.speed(4)
+        owl.speed(6)
         owl.setheading(0)
         owl.forward(650)
+        
         owl.setheading(180)
         owl.forward(650)
         i += 1
@@ -220,6 +227,7 @@ while i < 500:
         owl.setheading(180)
         owl.forward(650)
         i += 1
+
 ###############cursor picture jawn
 
 cursor= turtle.Turtle()
