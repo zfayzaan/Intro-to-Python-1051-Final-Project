@@ -5,9 +5,10 @@ import random
 
 
 wn = turtle.Screen() #makes background and sets color to white
-wn.bgpic('gamebackground.gif')
+wn.bgpic('gamebackground4.gif')
 wn.title("Owl Clicker")
 wn.setup(1000, 800)
+wn.screensize(1000,800)
 wn.bgcolor("white")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
@@ -33,6 +34,26 @@ double = False #this variable is set to False but when we press on the upgrade b
 quad =  False 
 purchased = False
 
+clicksBackgroundx = -150
+clicksBackgroundy = 297
+clicksBackgroundLength = 300
+clicksBackgroundWidth = 70
+
+backgroundPen = turtle.Turtle() #this is the original clicks counter that is drawn
+backgroundPen.hideturtle()
+backgroundPen.color("white")
+
+backgroundPen.penup()
+backgroundPen.begin_fill()
+backgroundPen.fillcolor('red')
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy)
+backgroundPen.goto(clicksBackgroundx + clicksBackgroundLength, clicksBackgroundy)
+backgroundPen.goto(clicksBackgroundx + clicksBackgroundLength, clicksBackgroundy + clicksBackgroundWidth)
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy + clicksBackgroundWidth)
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy)
+backgroundPen.end_fill()
+backgroundPen.goto(clicksBackgroundx + 15, clicksBackgroundy + 15)
+
 textPen = turtle.Turtle() #this is the original clicks counter that is drawn
 textPen.hideturtle()
 textPen.color("white")
@@ -45,8 +66,10 @@ def clickedOnOwl(x, y):
     global double
     global quad
     global purchased
-    clicks += 1 
-    if double == True:
+    clicks += 1
+    if double == True and quad == True:
+        clicks += 7
+    elif double == True:
         clicks += 1
     elif quad == True:
         clicks += 3 
@@ -177,7 +200,7 @@ def buttonClicks(x, y):
                 ButtonPen.goto(Button_x, Button_y)
                 ButtonPen.end_fill()
                 ButtonPen.goto(Button_x + 15, Button_y + 15)
-                ButtonPen.write("PURCHASED", font=('Arial', 15, 'normal'))
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
                 double = True #double becomes true here after the user presses on the button. So now pressing on the owl will give 2x
                 clicks = clicks - 30
     if ButtonQuad_x <= x <= ButtonQuad_x + ButtonQuadLength:
@@ -194,11 +217,9 @@ def buttonClicks(x, y):
                 ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
                 ButtonPen.end_fill()
                 ButtonPen.goto(ButtonQuad_x + 15, ButtonQuad_y + 15)
-                ButtonPen.write("PURCHASED", font=('Arial', 15, 'normal'))
-                double = False 
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
                 quad = True
                 clicks = clicks - 90
-
     if Button2_x <= x <= Button2_x + Button2Length: #checking if user has pressed the second button labeled "Auto Click #1"
         if Button2_y <= y <= Button2_y + Button2Width:
             if clicks >= 60:
@@ -280,12 +301,7 @@ while i < 500:
     owl.setheading(180)
     owl.forward(650)
     i += 1
-##########################################sound jawn
-
-
-
-
-
+########################################## sound
 
 wn.mainloop()
 
