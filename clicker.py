@@ -51,7 +51,7 @@ def clickedOnOwl(x, y):
     elif quad == True:
         clicks += 3 
     textPen.clear()
-    textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold")) #this is the updated clicks counter that is drawn after clicking on the owl
+    textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold"))#this is the updated clicks counter that is drawn after clicking on the owl
     owl.shape(owlimage)
     owl.shape(owlSmaller) #these two lines is what animates the owl
 
@@ -60,7 +60,8 @@ def autoClicker(n=1): #function for auto clicker. Adds one to clicks every secon
     while True:
         clicks += 1
         time.sleep(n)
-
+        #got rid of it here cuz the whole thing stops working with anything after time
+        
 ###################################################################################################################
 
 ButtonPen = turtle.Turtle() #the pen used to make the button
@@ -104,7 +105,8 @@ def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the bu
     ButtonPen.end_fill()
     ButtonPen.goto(Button_x + 15, Button_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
-def drawButtonQuad(ButtonPen, message = '4x Click POwer | COST 90'):
+
+def drawButtonQuad(ButtonPen, message = '4x Click Power | COST 90'):
     ButtonPen.penup()
     ButtonPen.begin_fill()
     ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
@@ -264,6 +266,7 @@ owl.onclick(clickedOnOwl)
 owl.penup() #makes owl go left and right
 i = 0
 while i < 500:
+    
     if slowDown == False:
         owl.speed(6)
     else:
@@ -285,3 +288,5 @@ while i < 500:
 
 
 wn.mainloop()
+
+
