@@ -2,10 +2,10 @@ import turtle
 import time
 import threading
 import random
-
+import subprocess
 
 wn = turtle.Screen() #makes background and sets color to white
-wn.bgpic('gamebackground4.gif')
+wn.bgpic('gamebackground.gif')
 wn.title("Owl Clicker")
 wn.setup(1000, 800)
 wn.screensize(1000,800)
@@ -66,6 +66,7 @@ def clickedOnOwl(x, y):
     global double
     global quad
     global purchased
+    subprocess.call(["afplay", "collect.mp3"])
     clicks += 1
     if double == True and quad == True:
         clicks += 7
@@ -302,6 +303,7 @@ while i < 500:
     owl.forward(650)
     i += 1
 ########################################## sound
+
 
 wn.mainloop()
 
