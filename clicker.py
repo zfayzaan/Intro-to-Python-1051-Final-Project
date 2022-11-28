@@ -7,10 +7,12 @@ import random
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')
 wn.title("Owl Clicker")
-#wn.bgcolor("white")
+wn.setup(1000, 800)
+wn.bgcolor("white")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
 wn.register_shape("owl_90.gif")
+
 wn.register_shape("rosen.gif")
 wn.register_shape("rosen_90.gif")
 
@@ -28,6 +30,8 @@ starttime = time.time()
 slowDown = False
 
 double = False #this variable is set to False but when we press on the upgrade button it becomes True and then our clicks allows us to get 2x
+quad =  False 
+purchased = False
 
 textPen = turtle.Turtle() #this is the original clicks counter that is drawn
 textPen.hideturtle()
@@ -39,7 +43,13 @@ textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bol
 def clickedOnOwl(x, y):
     global clicks
     global double
-    clicks += 1 + 1 * double # multiplying by boolean value of double. if double is true then our mouseclicks will yield 2x
+    global quad
+    global purchased
+    clicks += 1 
+    if double == True:
+        clicks += 1
+    elif quad == True:
+        clicks += 3 
     textPen.clear()
     textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold")) #this is the updated clicks counter that is drawn after clicking on the owl
     owl.shape(owlimage)
@@ -73,10 +83,15 @@ Button3_y = -360
 Button3Length = 200
 Button3Width = 50
 
-ButtonR_x = -195
+ButtonR_x = 195
 ButtonR_y = -300
 ButtonRLength = 200
 ButtonRWidth = 50
+
+ButtonQuad_x = -195
+ButtonQuad_y = -300
+ButtonQuadLength = 200
+ButtonQuadWidth = 50
 
 def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the button with the message
     ButtonPen.penup()
@@ -88,6 +103,17 @@ def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the bu
     ButtonPen.goto(Button_x, Button_y)
     ButtonPen.end_fill()
     ButtonPen.goto(Button_x + 15, Button_y + 15)
+    ButtonPen.write(message, font = ('Arial', 15, 'normal'))
+def drawButtonQuad(ButtonPen, message = '4x Click POwer | COST 90'):
+    ButtonPen.penup()
+    ButtonPen.begin_fill()
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+    ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y)
+    ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y + ButtonQuadWidth)
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y + ButtonQuadWidth)
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+    ButtonPen.end_fill()
+    ButtonPen.goto(ButtonQuad_x + 15, ButtonQuad_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
 
 def drawButtonAuto(ButtonPen, message = 'Auto Click #1 | COST 60'): #makes the button with the message
@@ -128,14 +154,16 @@ def drawRosenbutton(ButtonPen, message = 'Click for a Suprise'):
 
 def buttonClicks(x, y):
     global double
+    global quad
     global clicks
     global slowDown
     global autoClicker
     global owlimage
     global owlSmaller
+    global purchased
     if Button_x <= x <= Button_x + ButtonLength:
         if Button_y <= y <= Button_y + ButtonWidth:
-            if clicks >= 30:
+            if clicks >= 30 and purchased == False:
                 ButtonPen.fillcolor('green') #makes the button green because we have now purchased
                 ButtonPen.pencolor('black')
                 ButtonPen.penup()
@@ -147,9 +175,28 @@ def buttonClicks(x, y):
                 ButtonPen.goto(Button_x, Button_y)
                 ButtonPen.end_fill()
                 ButtonPen.goto(Button_x + 15, Button_y + 15)
-                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'normal'))
                 double = True #double becomes true here after the user presses on the button. So now pressing on the owl will give 2x
                 clicks = clicks - 30
+    if ButtonQuad_x <= x <= ButtonQuad_x + ButtonQuadLength:
+        if ButtonQuad_y <= y <= ButtonQuad_y + ButtonQuadWidth:
+            if clicks >= 90:
+                ButtonPen.fillcolor('green') #makes the button green because we have now purchased
+                ButtonPen.pencolor('black')
+                ButtonPen.penup()
+                ButtonPen.begin_fill()
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+                ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y)
+                ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y + ButtonQuadWidth)
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y + ButtonQuadWidth)
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+                ButtonPen.end_fill()
+                ButtonPen.goto(ButtonQuad_x + 15, ButtonQuad_y + 15)
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'normal'))
+                double = False 
+                quad = True
+                clicks = clicks - 90
+
     if Button2_x <= x <= Button2_x + Button2Length: #checking if user has pressed the second button labeled "Auto Click #1"
         if Button2_y <= y <= Button2_y + Button2Width:
             if clicks >= 60:
@@ -207,6 +254,7 @@ def buttonClicks(x, y):
 wn.onclick(buttonClicks)
 
 drawButton2x(ButtonPen)
+drawButtonQuad(ButtonPen)
 drawButtonAuto(ButtonPen)
 drawButtonSlower(ButtonPen)
 drawRosenbutton(ButtonPen)
@@ -218,22 +266,18 @@ i = 0
 while i < 500:
     if slowDown == False:
         owl.speed(6)
-        owl.setheading(0)
-        owl.forward(650)
-        
-        owl.setheading(180)
-        owl.forward(650)
-        i += 1
     else:
         owl.speed(1)
-        owl.setheading(0)
-        owl.forward(650)
-        owl.setheading(180)
-        owl.forward(650)
-        i += 1
-
-###############cursor picture jawn
-
+    owl.setheading(0)
+    owl.forward(650)
+    if slowDown == False:
+        owl.speed(6)
+    else:
+        owl.speed(1)
+    owl.setheading(180)
+    owl.forward(650)
+    i += 1
+##########################################sound jawn
 
 
 
@@ -241,5 +285,3 @@ while i < 500:
 
 
 wn.mainloop()
-turtle.mainloop()
-
