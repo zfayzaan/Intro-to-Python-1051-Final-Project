@@ -11,7 +11,6 @@ wn.title("Owl Clicker")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
 wn.register_shape("owl_90.gif")
-wn.register_shape("burger.gif") #cursorimage place holder
 wn.register_shape("rosen.gif")
 wn.register_shape("rosen_90.gif")
 
@@ -235,35 +234,12 @@ while i < 500:
 
 ###############cursor picture jawn
 
-cursor= turtle.Turtle()
-cursorscreen = turtle.Screen()
-cursorimage= "burger.gif"
-def tofront(self, tobring):
-    newfront = tobring.clone()
-    tobring.ht()
-    return newfront
-
-cursorscreen.addshape(cursorimage)
-cursor.shape(cursorimage)
-cursor.up()
-def onmove(self, fun, add =None):
-    if fun is None:
-        self.cv.unbind('<Motion>')
-    else:
-        def eventfun(event):
-            fun(self.cv.canvasx(event.x) / self.xscale, -self.cv.canvasy(event.y) / self.yscale)
-        self.cv.bind('<Motion>', eventfun, add)
-
-def goto_handler(x,y):
-    onmove(cursorscreen, None)
-    cursor.setheading(cursor.towards(x,y))
-    cursor.goto(x,y)
-    onmove(cursorscreen, goto_handler)
 
 
 
 
-onmove(cursorscreen, goto_handler)
+
+
 wn.mainloop()
 turtle.mainloop()
 
