@@ -35,7 +35,7 @@ owlimage = "owl.gif"
 owlSmaller = "owl_90.gif"
 owl.shape(owlimage) #owlshape is now the image we selected
 owl.penup()
-owl.setpos(-300,0)
+#owl.setpos(-300,0)
 owl.speed(4)
 
 clicks = 0
@@ -303,23 +303,34 @@ owl.onclick(clickedOnOwl)
 
 owl.penup() #makes owl go left and right
 i = 0
-while i < 500:
-    
-    if slowDown == False:
-        owl.speed(6)
+distance =(random.randint(25,300))
+turndegree= random.randint(30,360)
+leftorright= ["R","L"]
+choicejawn = random.choice(leftorright)
+while i < 5000:
+    distance
+    turndegree
+    choicejawn
+    if (owl.xcor() > -450 and owl.xcor() <450) and (owl.ycor() >-350 and owl.ycor() <350):   #found on stackoverflow
+        owl.forward(distance)
+        
+        if choicejawn == "R":
+            owl.right(turndegree)
+        if choicejawn == "L":
+            owl.left(turndegree)
+        if slowDown == False:
+            owl.speed(4)
+        elif slowDown == True:
+            owl.speed(1)
     else:
-        owl.speed(1)
-    owl.setheading(0)
-    owl.forward(650)
-    if slowDown == False:
-        owl.speed(6)
-    else:
-        owl.speed(1)
-    owl.setheading(180)
-    owl.forward(650)
+        owl.right(180)
+        owl.forward(distance)
+        if slowDown == False:
+            owl.speed(4)
+        elif slowDown == True:
+            owl.speed(1)
     i += 1
 ########################################## 
-
 
 wn.mainloop()
 
