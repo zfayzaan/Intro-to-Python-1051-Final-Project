@@ -4,6 +4,7 @@ import threading
 import random
 import tkinter as tk
 import main_menu
+import subprocess
 
 def which_window():
     if clicker()== True:
@@ -17,10 +18,13 @@ def which_window():
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')
 wn.title("Owl Clicker")
-#wn.bgcolor("white")
+wn.setup(1000, 800)
+wn.screensize(1000,800)
+wn.bgcolor("white")
 
 wn.register_shape("owl.gif") #first shape here is the normal owl, and then a smaller one so that on press, it looks animated
 wn.register_shape("owl_90.gif")
+
 wn.register_shape("rosen.gif")
 wn.register_shape("rosen_90.gif")
 
@@ -38,6 +42,28 @@ starttime = time.time()
 slowDown = False
 
 double = False #this variable is set to False but when we press on the upgrade button it becomes True and then our clicks allows us to get 2x
+quad =  False 
+purchased = False
+
+clicksBackgroundx = -150
+clicksBackgroundy = 297
+clicksBackgroundLength = 300
+clicksBackgroundWidth = 70
+
+backgroundPen = turtle.Turtle() #this is the original clicks counter that is drawn
+backgroundPen.hideturtle()
+backgroundPen.color("white")
+
+backgroundPen.penup()
+backgroundPen.begin_fill()
+backgroundPen.fillcolor('red')
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy)
+backgroundPen.goto(clicksBackgroundx + clicksBackgroundLength, clicksBackgroundy)
+backgroundPen.goto(clicksBackgroundx + clicksBackgroundLength, clicksBackgroundy + clicksBackgroundWidth)
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy + clicksBackgroundWidth)
+backgroundPen.goto(clicksBackgroundx, clicksBackgroundy)
+backgroundPen.end_fill()
+backgroundPen.goto(clicksBackgroundx + 15, clicksBackgroundy + 15)
 
 textPen = turtle.Turtle() #this is the original clicks counter that is drawn
 textPen.hideturtle()
@@ -49,9 +75,18 @@ textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bol
 def clickedOnOwl(x, y):
     global clicks
     global double
-    clicks += 1 + 1 * double # multiplying by boolean value of double. if double is true then our mouseclicks will yield 2x
+    global quad
+    global purchased
+    subprocess.call(["afplay", "collect.mp3"])
+    clicks += 1
+    if double == True and quad == True:
+        clicks += 7
+    elif double == True:
+        clicks += 1
+    elif quad == True:
+        clicks += 3 
     textPen.clear()
-    textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold")) #this is the updated clicks counter that is drawn after clicking on the owl
+    textPen.write(f"Clicks: {clicks}", align="center", font=("Courier New", 50, "bold"))#this is the updated clicks counter that is drawn after clicking on the owl
     owl.shape(owlimage)
     owl.shape(owlSmaller) #these two lines is what animates the owl
 
@@ -60,6 +95,8 @@ def autoClicker(n=1): #function for auto clicker. Adds one to clicks every secon
     while True:
         clicks += 1
         time.sleep(n)
+        #got rid of it here cuz the whole thing stops working with anything after time
+        
 ###################################################################################################################
 
 ButtonPen = turtle.Turtle() #the pen used to make the button
@@ -82,10 +119,15 @@ Button3_y = -360
 Button3Length = 200
 Button3Width = 50
 
-ButtonR_x = -195
+ButtonR_x = 195
 ButtonR_y = -300
 ButtonRLength = 200
 ButtonRWidth = 50
+
+ButtonQuad_x = -195
+ButtonQuad_y = -300
+ButtonQuadLength = 200
+ButtonQuadWidth = 50
 
 def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the button with the message
     ButtonPen.penup()
@@ -97,6 +139,18 @@ def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the bu
     ButtonPen.goto(Button_x, Button_y)
     ButtonPen.end_fill()
     ButtonPen.goto(Button_x + 15, Button_y + 15)
+    ButtonPen.write(message, font = ('Arial', 15, 'normal'))
+
+def drawButtonQuad(ButtonPen, message = '4x Click Power | COST 90'):
+    ButtonPen.penup()
+    ButtonPen.begin_fill()
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+    ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y)
+    ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y + ButtonQuadWidth)
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y + ButtonQuadWidth)
+    ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+    ButtonPen.end_fill()
+    ButtonPen.goto(ButtonQuad_x + 15, ButtonQuad_y + 15)
     ButtonPen.write(message, font = ('Arial', 15, 'normal'))
 
 def drawButtonAuto(ButtonPen, message = 'Auto Click #1 | COST 60'): #makes the button with the message
@@ -137,16 +191,19 @@ def drawRosenbutton(ButtonPen, message = 'Click for a Suprise'):
 
 def buttonClicks(x, y):
     global double
+    global quad
     global clicks
     global slowDown
     global autoClicker
     global owlimage
     global owlSmaller
+    global purchased
     if Button_x <= x <= Button_x + ButtonLength:
         if Button_y <= y <= Button_y + ButtonWidth:
-            if clicks >= 30:
+            if clicks >= 30 and purchased == False:
                 ButtonPen.fillcolor('green') #makes the button green because we have now purchased
                 ButtonPen.pencolor('black')
+                
                 ButtonPen.penup()
                 ButtonPen.begin_fill()
                 ButtonPen.goto(Button_x, Button_y)
@@ -159,6 +216,23 @@ def buttonClicks(x, y):
                 ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
                 double = True #double becomes true here after the user presses on the button. So now pressing on the owl will give 2x
                 clicks = clicks - 30
+    if ButtonQuad_x <= x <= ButtonQuad_x + ButtonQuadLength:
+        if ButtonQuad_y <= y <= ButtonQuad_y + ButtonQuadWidth:
+            if clicks >= 90:
+                ButtonPen.fillcolor('green') #makes the button green because we have now purchased
+                ButtonPen.pencolor('black')
+                ButtonPen.penup()
+                ButtonPen.begin_fill()
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+                ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y)
+                ButtonPen.goto(ButtonQuad_x + ButtonQuadLength, ButtonQuad_y + ButtonQuadWidth)
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y + ButtonQuadWidth)
+                ButtonPen.goto(ButtonQuad_x, ButtonQuad_y)
+                ButtonPen.end_fill()
+                ButtonPen.goto(ButtonQuad_x + 15, ButtonQuad_y + 15)
+                ButtonPen.write("PURCHASED", font=('Arial', 15, 'bold'))
+                quad = True
+                clicks = clicks - 90
     if Button2_x <= x <= Button2_x + Button2Length: #checking if user has pressed the second button labeled "Auto Click #1"
         if Button2_y <= y <= Button2_y + Button2Width:
             if clicks >= 60:
@@ -180,6 +254,7 @@ def buttonClicks(x, y):
     if Button3_x <= x <= Button3_x + Button3Length:
         if Button3_y <= y <= Button3_y + Button3Width:
             if clicks >= 15:
+                
                 ButtonPen.fillcolor('green')
                 ButtonPen.pencolor('black')
                 ButtonPen.penup()
@@ -196,8 +271,10 @@ def buttonClicks(x, y):
                 slowDown = True
     if ButtonR_x <= x <= ButtonR_x + ButtonRLength:
         if ButtonR_y <= y <= ButtonR_y + ButtonRWidth:
+            
             ButtonPen.fillcolor('green')
             ButtonPen.pencolor('black')
+            
             ButtonPen.penup()
             ButtonPen.begin_fill()
             ButtonPen.goto(ButtonR_x, ButtonR_y)
@@ -216,6 +293,7 @@ def buttonClicks(x, y):
 wn.onclick(buttonClicks)
 
 drawButton2x(ButtonPen)
+drawButtonQuad(ButtonPen)
 drawButtonAuto(ButtonPen)
 drawButtonSlower(ButtonPen)
 drawRosenbutton(ButtonPen)
@@ -225,30 +303,24 @@ owl.onclick(clickedOnOwl)
 owl.penup() #makes owl go left and right
 i = 0
 while i < 500:
+    
     if slowDown == False:
         owl.speed(6)
-        owl.setheading(0)
-        owl.forward(650)
-        
-        owl.setheading(180)
-        owl.forward(650)
-        i += 1
     else:
         owl.speed(1)
-        owl.setheading(0)
-        owl.forward(650)
-        owl.setheading(180)
-        owl.forward(650)
-        i += 1
-
-###############cursor picture jawn
-
-
-
-
-
+    owl.setheading(0)
+    owl.forward(650)
+    if slowDown == False:
+        owl.speed(6)
+    else:
+        owl.speed(1)
+    owl.setheading(180)
+    owl.forward(650)
+    i += 1
+########################################## 
 
 
 wn.mainloop()
-turtle.mainloop()
+
+
 
