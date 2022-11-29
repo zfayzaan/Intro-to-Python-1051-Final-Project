@@ -1,2 +1,2 @@
 #about us
-print ("we are a group of Noel Faze and Shyke")
+print("we are a group of Noel, Fayz and Shyke")
