@@ -2,7 +2,17 @@ import turtle
 import time
 import threading
 import random
+import tkinter as tk
+import main_menu
 
+def which_window():
+    if clicker()== True:
+        clicker()
+    elif map_select()==True:
+        map_select()
+    else:
+        aboutUs()
+        
 
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')
@@ -50,7 +60,6 @@ def autoClicker(n=1): #function for auto clicker. Adds one to clicks every secon
     while True:
         clicks += 1
         time.sleep(n)
-
 ###################################################################################################################
 
 ButtonPen = turtle.Turtle() #the pen used to make the button
