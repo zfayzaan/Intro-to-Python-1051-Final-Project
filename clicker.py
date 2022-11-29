@@ -6,6 +6,7 @@ import tkinter as tk
 import main_menu
 import subprocess
 
+"""
 def which_window():
     if clicker()== True:
         clicker()
@@ -13,7 +14,7 @@ def which_window():
         map_select()
     else:
         aboutUs()
-        
+"""      
 
 wn = turtle.Screen() #makes background and sets color to white
 wn.bgpic('gamebackground.gif')

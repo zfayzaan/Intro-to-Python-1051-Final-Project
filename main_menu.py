@@ -1,4 +1,5 @@
 from tkinter import *
+import subprocess
 
 ws = Tk()
 ws.geometry('1000x800')
@@ -8,7 +9,9 @@ ws['bg']='#5d8a82'
 f = ("Times bold", 14)
 
 def clicker():
+    
     ws.destroy()
+    
 
 def mapSelect():
     ws.destroy()
@@ -34,9 +37,10 @@ Button(
 
 Button(
     ws, 
-    text="Play Game", 
+    text="Play Game",
     font=f,
     command=mapSelect
     ).pack(fill=X, expand=TRUE, side=LEFT)
-
+    
 ws.mainloop()
+subprocess.call(["afplay", "clicksound.wav"])

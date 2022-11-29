@@ -1,2 +1,2 @@
 #about us
-print ("we are a group of noel faze and shyke")
+print ("we are a group of Noel Faze and Shyke")
