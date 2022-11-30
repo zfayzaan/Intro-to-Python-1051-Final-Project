@@ -8,10 +8,12 @@ ws['bg']='#5d8a82'
 
 f = ("Times bold", 14)
 
+ws.pack()
+image = PhotoImage(file = "C:\Users\sdogj\OneDrive - Temple University\Documents\Python Class\final project\preposal\temple_owl_logo.png")
+
 def clicker():
-    
     ws.destroy()
-    
+    import clicker
 
 def mapSelect():
     ws.destroy()
@@ -32,14 +34,14 @@ Button(
     ws, 
     text="Select Map", 
     font=f,
-    command=clicker
+    command=mapSelect
     ).pack(fill=X, expand=TRUE, side=LEFT)
 
 Button(
     ws, 
     text="Play Game",
     font=f,
-    command=mapSelect
+    command=clicker
     ).pack(fill=X, expand=TRUE, side=LEFT)
     
 ws.mainloop()

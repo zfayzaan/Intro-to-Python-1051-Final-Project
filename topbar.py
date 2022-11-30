@@ -1,16 +1,15 @@
-from tkinter import*
+from tkinter import *
 
-root =Tk()
-
-
-my_menu= Menu(root)
-root.config(menu=my_menu)
-
-#Creating the menu items
-
-file_menu = Menu(my_menu)
-my_menu.add_cascade(label="Main Menu",menu=file_menu)
-file_menu.add_command(Label="New.." , commmand=our_command)
-
-
-root.mainloop()
+ws = Tk()
+ws.geometry('600x600')
+def drawButton2x(ButtonPen, message = '2x Click Power | COST 30'): #makes the button with the message
+    ButtonPen.penup()
+    ButtonPen.begin_fill()
+    ButtonPen.goto(Button_x, Button_y)
+    ButtonPen.goto(Button_x + ButtonLength, Button_y)
+    ButtonPen.goto(Button_x + ButtonLength, Button_y + ButtonWidth)
+    ButtonPen.goto(Button_x, Button_y + ButtonWidth)
+    ButtonPen.goto(Button_x, Button_y)
+    ButtonPen.end_fill()
+    ButtonPen.goto(Button_x + 15, Button_y + 15)
+    ButtonPen.write(message, font = ('Arial', 15, 'normal'))
