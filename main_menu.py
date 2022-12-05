@@ -8,9 +8,6 @@ ws['bg']='#5d8a82'
 
 f = ("Times bold", 14)
 
-ws.pack()
-image = PhotoImage(file = "C:\Users\sdogj\OneDrive - Temple University\Documents\Python Class\final project\preposal\temple_owl_logo.png")
-
 def clicker():
     ws.destroy()
     import clicker
